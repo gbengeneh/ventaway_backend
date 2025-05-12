@@ -1,6 +1,11 @@
 // src/post/dto/update-post.dto.ts
 import { IsEnum, IsOptional, IsString, IsUrl } from 'class-validator';
-import { MediaType } from '@prisma/client';
+// Define MediaType enum locally or import it from the correct source
+enum MediaType {
+  IMAGE = 'IMAGE',
+  VIDEO = 'VIDEO',
+  AUDIO = 'AUDIO',
+}
 
 export class UpdatePostDto {
   @IsOptional()

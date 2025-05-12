@@ -3,7 +3,9 @@ import { MessageService } from './message.service';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { UpdateStatusDto } from './dto/update-status.dto';
 import { JwtGuard } from '../auth/guards/jwt.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('messages')
 @Controller('messages')
 export class MessageController {
   constructor(private readonly service: MessageService) {}

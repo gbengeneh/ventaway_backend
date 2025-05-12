@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateMessageDto } from './dto/create-message.dto';
-import { MediaType, MessageStatus } from '@prisma/client';
+export type MessageStatus = 'SENT' | 'DELIVERED' | 'READ'; // Define MessageStatus manually
+
+export type MediaType = 'IMAGE' | 'VIDEO' | 'AUDIO' | 'TEXT'; // Define MediaType manually if not exported
 
 @Injectable()
 export class MessageService {

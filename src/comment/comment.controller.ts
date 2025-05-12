@@ -14,7 +14,9 @@ import {
   import { CreateCommentDto } from './dto/create-comment.dto';
   import { UpdateCommentDto } from './dto/update-comment.dto';
   import { JwtGuard } from '../auth/guards/jwt.guard';
+  import { ApiTags } from '@nestjs/swagger';
   
+  @ApiTags('comments')
   @Controller('comments')
   export class CommentController {
     constructor(private readonly commentService: CommentService) {}

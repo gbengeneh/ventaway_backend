@@ -2,7 +2,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "./node_modules/@prisma/client"
 }
 
 datasource db {
@@ -49,6 +48,7 @@ model Post {
 }
 
 enum MediaType {
+  TEXT
   IMAGE
   VIDEO
   AUDIO
@@ -80,7 +80,7 @@ model Group {
   name        String
   description String?
   createdAt   DateTime @default(now())
-  imageUrl    String?  // Add image_url field
+  imageUrl    String? // Add image_url field
 
   members GroupMember[]
 }
@@ -101,11 +101,10 @@ model Community {
   name        String
   description String?
   createdAt   DateTime @default(now())
-  imageUrl    String?  // Add image_url field
+  imageUrl    String? // Add image_url field
 
   members CommunityMember[]
 }
-
 
 model CommunityMember {
   id          String   @id @default(cuid())

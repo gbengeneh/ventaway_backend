@@ -1,6 +1,10 @@
 // src/post/dto/create-post.dto.ts
 import { IsEnum, IsOptional, IsString, IsUrl } from 'class-validator';
-import { MediaType } from '@prisma/client';
+export enum MediaType {
+  IMAGE = 'IMAGE',
+  VIDEO = 'VIDEO',
+  AUDIO = 'AUDIO',
+}
 
 export class CreatePostDto {
   @IsOptional()

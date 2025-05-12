@@ -4,28 +4,31 @@ import { GroupService } from './group.service';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
 import { JwtGuard } from '../auth/guards/jwt.guard';
-import { AdminGuard } from 'src/auth/guards/admin.guard';
+import { AdminGuard } from '../auth/guards/admin.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+
+@ApiTags('groups')
+@UseGuards(JwtGuard, AdminGuard)
 @Controller('groups')
 export class GroupController {
   constructor(private readonly groupService: GroupService) {}
 
   // Create a new group
-  @UseGuards(JwtGuard)
   @Post()
   create(@Body() createGroupDto: CreateGroupDto, @Req() req) {
     return this.groupService.create(createGroupDto, req.user.sub);
   }
 
-  @UseGuards(JwtGuard , AdminGuard)
-@Patch(':groupId/members/:userId/role')
-updateRole(
-  @Param('groupId') groupId: string,
-  @Param('userId') userId: string,
-  @Body('role') role: string
-) {
-  return this.groupService.updateRole(groupId, userId, role);
-}
+  @Patch(':groupId/members/:userId/role')
+  updateRole(
+    @Param('groupId') groupId: string,
+    @Param('userId') userId: string,
+    @Body('role') role: string
+  ) {
+    return this.groupService.updateRole(groupId, userId, role);
+  }
+
   // Get all groups
   @Get()
   findAll() {
@@ -39,21 +42,18 @@ updateRole(
   }
 
   // Update a group
-  @UseGuards(JwtGuard, AdminGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateGroupDto: UpdateGroupDto) {
     return this.groupService.update(id, updateGroupDto);
   }
 
   // Delete a group
-  @UseGuards(JwtGuard , AdminGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.groupService.remove(id);
   }
 
   // Add member to a group
-  @UseGuards(JwtGuard, AdminGuard)
   @Post(':groupId/members/:userId')
   addMember(
     @Param('groupId') groupId: string, 
@@ -64,7 +64,6 @@ updateRole(
   }
 
   // Remove a member from a group
-  @UseGuards(JwtGuard, AdminGuard)
   @Delete(':groupId/members/:userId')
   removeMember(@Param('groupId') groupId: string, @Param('userId') userId: string) {
     return this.groupService.removeMember(groupId, userId);

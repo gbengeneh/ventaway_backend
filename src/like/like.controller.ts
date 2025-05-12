@@ -2,6 +2,9 @@
 import { Controller, Post, Param, UseGuards, Req, Get } from '@nestjs/common';
 import { LikeService } from './like.service';
 import { JwtGuard } from '../auth/guards/jwt.guard';
+import { ApiTags } from '@nestjs/swagger';
+
+@ApiTags('likes')
 
 @Controller('likes')
 export class LikeController {
